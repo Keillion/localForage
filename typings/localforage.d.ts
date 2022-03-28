@@ -25,12 +25,7 @@ interface LocalForageDbMethodsCore {
 
     length(callback?: (err: any, numberOfKeys: number) => void): Promise<number>;
 
-    key(keyIndex: number, callback?: (err: any, key: string) => void): Promise<string>;
-
     keys(callback?: (err: any, keys: string[]) => void): Promise<string[]>;
-
-    iterate<T, U>(iteratee: (value: T, key: string, iterationNumber: number) => U,
-            callback?: (err: any, result: U) => void): Promise<U>;
 }
 
 interface LocalForageDropInstanceFn {
@@ -59,16 +54,6 @@ interface LocalForageDriver extends LocalForageDriverDbMethods {
     _initStorage(options: LocalForageOptions): void;
 
     _support?: boolean | LocalForageDriverSupportFunc;
-}
-
-interface LocalForageSerializer {
-    serialize<T>(value: T | ArrayBuffer | Blob, callback: (value: string, error: any) => void): void;
-
-    deserialize<T>(value: string): T | ArrayBuffer | Blob;
-
-    stringToBuffer(serializedString: string): ArrayBuffer;
-
-    bufferToString(buffer: ArrayBuffer): string;
 }
 
 interface LocalForageDbMethods extends LocalForageDbMethodsCore, LocalForageDbMethodsOptional {}
@@ -109,8 +94,6 @@ interface LocalForage extends LocalForageDbMethods {
      * @param {string} driver
      */
     getDriver(driver: string): Promise<LocalForageDriver>;
-
-    getSerializer(callback?: (serializer: LocalForageSerializer) => void): Promise<LocalForageSerializer>;
 
     supports(driverName: string): boolean;
 

@@ -38,3 +38,7 @@ doc/
 
 # typescript cache
 .tscache
+
+dist
+.git
+yarn.lock

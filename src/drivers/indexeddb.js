@@ -1,7 +1,6 @@
 import isIndexedDBValid from '../utils/isIndexedDBValid';
 import createBlob from '../utils/createBlob';
 import idb from '../utils/idb';
-import Promise from '../utils/promise';
 import executeCallback from '../utils/executeCallback';
 import executeTwoCallbacks from '../utils/executeTwoCallbacks';
 import normalizeKey from '../utils/normalizeKey';
@@ -547,72 +546,6 @@ function getItem(key, callback) {
     return promise;
 }
 
-// Iterate over all items stored in database.
-function iterate(iterator, callback) {
-    var self = this;
-
-    var promise = new Promise(function(resolve, reject) {
-        self
-            .ready()
-            .then(function() {
-                createTransaction(self._dbInfo, READ_ONLY, function(
-                    err,
-                    transaction
-                ) {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    try {
-                        var store = transaction.objectStore(
-                            self._dbInfo.storeName
-                        );
-                        var req = store.openCursor();
-                        var iterationNumber = 1;
-
-                        req.onsuccess = function() {
-                            var cursor = req.result;
-
-                            if (cursor) {
-                                var value = cursor.value;
-                                if (_isEncodedBlob(value)) {
-                                    value = _decodeBlob(value);
-                                }
-                                var result = iterator(
-                                    value,
-                                    cursor.key,
-                                    iterationNumber++
-                                );
-
-                                // when the iterator callback returns any
-                                // (non-`undefined`) value, then we stop
-                                // the iteration immediately
-                                if (result !== void 0) {
-                                    resolve(result);
-                                } else {
-                                    cursor.continue();
-                                }
-                            } else {
-                                resolve();
-                            }
-                        };
-
-                        req.onerror = function() {
-                            reject(req.error);
-                        };
-                    } catch (e) {
-                        reject(e);
-                    }
-                });
-            })
-            .catch(reject);
-    });
-
-    executeCallback(promise, callback);
-
-    return promise;
-}
-
 function setItem(key, value, callback) {
     var self = this;
 
@@ -812,75 +745,6 @@ function length(callback) {
 
                         req.onsuccess = function() {
                             resolve(req.result);
-                        };
-
-                        req.onerror = function() {
-                            reject(req.error);
-                        };
-                    } catch (e) {
-                        reject(e);
-                    }
-                });
-            })
-            .catch(reject);
-    });
-
-    executeCallback(promise, callback);
-    return promise;
-}
-
-function key(n, callback) {
-    var self = this;
-
-    var promise = new Promise(function(resolve, reject) {
-        if (n < 0) {
-            resolve(null);
-
-            return;
-        }
-
-        self
-            .ready()
-            .then(function() {
-                createTransaction(self._dbInfo, READ_ONLY, function(
-                    err,
-                    transaction
-                ) {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    try {
-                        var store = transaction.objectStore(
-                            self._dbInfo.storeName
-                        );
-                        var advanced = false;
-                        var req = store.openKeyCursor();
-
-                        req.onsuccess = function() {
-                            var cursor = req.result;
-                            if (!cursor) {
-                                // this means there weren't enough keys
-                                resolve(null);
-
-                                return;
-                            }
-
-                            if (n === 0) {
-                                // We have the first key, return it if that's what they
-                                // wanted.
-                                resolve(cursor.key);
-                            } else {
-                                if (!advanced) {
-                                    // Otherwise, ask the cursor to skip ahead n
-                                    // records.
-                                    advanced = true;
-                                    cursor.advance(n);
-                                } else {
-                                    // When we get here, we've got the nth key.
-                                    resolve(cursor.key);
-                                }
-                            }
                         };
 
                         req.onerror = function() {
@@ -1103,13 +967,11 @@ var asyncStorage = {
     _driver: 'asyncStorage',
     _initStorage: _initStorage,
     _support: isIndexedDBValid(),
-    iterate: iterate,
     getItem: getItem,
     setItem: setItem,
     removeItem: removeItem,
     clear: clear,
     length: length,
-    key: key,
     keys: keys,
     dropInstance: dropInstance
 };
