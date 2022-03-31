@@ -70,7 +70,7 @@ export default async(commandLineArgs)=>{
         {
           file: "dist/klocalforage.js",
           format: "umd",
-          name: "KLocalforage",
+          name: "klocalforage",
           exports: "default",
           sourcemap: true,
         },
@@ -78,7 +78,7 @@ export default async(commandLineArgs)=>{
         {
           file: "dist/klocalforage.min.js",
           format: "umd",
-          name: "KLocalforage",
+          name: "klocalforage",
           exports: "default",
           sourcemap: true,
           plugins: [
