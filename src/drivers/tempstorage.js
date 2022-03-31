@@ -54,7 +54,7 @@ function getItem(key, callback) {
     key = normalizeKey(key);
 
     const promise = this.ready().then(()=>{
-        return tempStorage.get(this._dbInfo.keyPrefix).getItem(key);
+        return tempStorage.get(this._dbInfo.keyPrefix).get(key);
     });
 
     executeCallback(promise, callback);
@@ -89,11 +89,10 @@ function removeItem(key, callback) {
 // in case you want to operate on that value only after you're sure it
 // saved, or something like that.
 function setItem(key, value, callback) {
-    var self = this;
 
     key = normalizeKey(key);
 
-    const promise = self.ready().then(()=>{
+    const promise = this.ready().then(()=>{
         // Convert undefined values to null.
         // https://github.com/mozilla/localForage/pull/42
         if (value === undefined) {
