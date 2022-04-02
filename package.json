@@ -2,16 +2,11 @@
     "name": "klocalforage",
     "author": "Mozilla, then Keillion modify it",
     "license": "Apache-2.0",
-    "keywords": [
-        "indexeddb",
-        "storage"
-    ],
-    "version": "1.10.0-k",
+    "version": "1.10.0",
     "files": [
       "/dist",
       "/types"
     ],
-    "homepage": "https://github.com/Keillion/localForage",
     "repository": {
         "type": "git",
         "url": "git://github.com/Keillion/localForage.git"
