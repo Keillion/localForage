@@ -1,12 +1,9 @@
 {
     "name": "klocalforage",
     "author": "Mozilla, then Keillion modify it",
-    "private": "true",
     "license": "Apache-2.0",
-    "description": "Offline storage, improved.",
     "keywords": [
         "indexeddb",
-        "localstorage",
         "storage"
     ],
     "version": "1.10.0-k",
@@ -22,7 +19,7 @@
     "module": "dist/klocalforage.mjs",
     "~~browser": "dist/klocalforage.mjs",
     "browser": "dist/klocalforage.esm.js",
-    "typings": "typings/localforage.d.ts",
+    "types": "types/localforage.d.ts",
     "devDependencies": {
       "rollup": "^2.70.1",
       "rollup-plugin-terser": "^7.0.2"

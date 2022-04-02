@@ -100,7 +100,6 @@ interface LocalForage extends LocalForageDbMethods {
     ready(callback?: (error: any) => void): Promise<void>;
 }
 
-declare module "localforage" {
-    let localforage: LocalForage;
-    export = localforage;
-}
+let localforage: LocalForage;
+
+export default localforage;
