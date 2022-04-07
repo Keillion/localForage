@@ -103,3 +103,5 @@ interface LocalForage extends LocalForageDbMethods {
 let localforage: LocalForage;
 
 export default localforage;
+
+export { LocalForage }
