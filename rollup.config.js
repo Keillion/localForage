@@ -23,62 +23,62 @@ export default async(commandLineArgs)=>{
     {
       input: "src/localforage.js",
       output: [
-        // klocalforage.mjs
+        // index.mjs
         // for rollup/webpack to compile together with other
         // or use in <script type="module">
         {
-          file: "dist/klocalforage.mjs",
+          file: "dist/index.mjs",
           format: "es",
           exports: "default",
           sourcemap: true,
           plugins: [
             { 
-              // klocalforage.esm.js
+              // index.esm.js
               // for rollup/webpack to compile together with other, target browser
               // same as mjs, webpack 4 don't know mjs, so current we still set esm.js as package.json->browser
 
               // https://rollupjs.org/guide/en/#writebundle
               async writeBundle(options, bundle){
-                await fs.copyFile('./dist/klocalforage.mjs', './dist/klocalforage.esm.js')
+                await fs.copyFile('./dist/index.mjs', './dist/index.esm.js')
               }
             },
           ],
         },
-        // klocalforage.min.mjs
+        // index.min.mjs
         {
-          file: "dist/klocalforage.min.mjs",
+          file: "dist/index.min.mjs",
           format: "es",
           exports: "default",
           sourcemap: true,
           plugins: [
             plugin_terser_esnext,
             { 
-              // klocalforage.esm.js
+              // index.esm.js
               // for rollup/webpack to compile together with other, target browser
               // same as mjs, webpack 4 don't know mjs, so current we still set esm.js as package.json->browser
 
               // https://rollupjs.org/guide/en/#writebundle
               async writeBundle(options, bundle){
-                await fs.copyFile('./dist/klocalforage.min.mjs', './dist/klocalforage.esm.min.js')
+                await fs.copyFile('./dist/index.min.mjs', './dist/index.esm.min.js')
               }
             },
           ],
         },
-        // klocalforage.js
+        // index.js
         // usage
-        // <script src="klocalforage.js"
+        // <script src="index.js"
         {
-          file: "dist/klocalforage.js",
+          file: "dist/index.js",
           format: "umd",
-          name: "klocalforage",
+          name: "index",
           exports: "default",
           sourcemap: true,
         },
-        // klocalforage.min.js
+        // index.min.js
         {
-          file: "dist/klocalforage.min.js",
+          file: "dist/index.min.js",
           format: "umd",
-          name: "klocalforage",
+          name: "index",
           exports: "default",
           sourcemap: true,
           plugins: [

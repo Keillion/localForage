@@ -2,7 +2,7 @@
     "name": "dmlokolforage",
     "author": "Mozilla, then Keillion modify it",
     "license": "Apache-2.0",
-    "version": "1.10.2",
+    "version": "1.10.3",
     "files": [
         "/dist",
         "/types"
@@ -14,10 +14,14 @@
     "scripts": {
         "build": "rollup -c"
     },
-    "main": "dist/klocalforage.js",
-    "module": "dist/klocalforage.mjs",
-    "~~browser": "dist/klocalforage.mjs",
-    "browser": "dist/klocalforage.esm.js",
+    "main": "./dist/index.js",
+    "~~module": "./dist/index.mjs",
+    "module": "./dist/index.esm.js",
+    "exports": {
+      "~~import": "./dist/index.mjs",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
     "sideEffects": false,
     "types": "types/localforage.d.ts",
     "devDependencies": {
