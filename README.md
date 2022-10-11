@@ -1,6 +1,6 @@
 # For chrome android 106 bug
 
-https://dynamsoft.github.io/localforage/test.html
+https://keillion.github.io/localForage/test.html
 
 # LocalForage modified by Keillion
 
