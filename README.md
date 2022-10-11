@@ -1,6 +1,6 @@
 # For chrome android 106 bug
 
-https://keillion.github.io/localForage/test.html
+https://keillion.github.io/localForage/indexedDB-cannot-open-in-andorid-chrome-106.html
 
 # LocalForage modified by Keillion
 
