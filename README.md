@@ -1,3 +1,7 @@
+# For chrome 106 bug
+
+https://dynamsoft.github.io/localforage/test.html
+
 # LocalForage modified by Keillion
 
 Base on [localforage](https://github.com/localForage/localForage) 1.10.0.
