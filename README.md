@@ -1,4 +1,4 @@
-# For chrome 106 bug
+# For chrome android 106 bug
 
 https://dynamsoft.github.io/localforage/test.html
 
