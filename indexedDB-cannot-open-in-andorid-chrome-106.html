@@ -22,7 +22,7 @@
         request.onsuccess = (event) => {
             db = event.target.result;
         };
-        setTimeout(()=>{console.log(db)},2000);
+        setTimeout(()=>{console.log(db);alert(`db available? ${!!db}`)},2000);
     </script>
 </body>
 </html>
